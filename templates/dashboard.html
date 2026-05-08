@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - SecureGate{% endblock %}
+
+{% block content %}
+<div class="dashboard-card glass-effect">
+    <header class="dashboard-header">
+        <h1>Dashboard</h1>
+        <a href="{{ url_for('logout') }}" class="btn btn-outline">Log Out</a>
+    </header>
+
+    <div class="dashboard-body">
+        <h2>Welcome, {{ user.username }}!</h2>
+        <p>You have successfully authenticated into the secure system.</p>
+
+        <div class="security-features">
+            <h3>Active Security Measures:</h3>
+            <ul>
+                <li><span class="icon">🔒</span> Bcrypt Password Hashing</li>
+                <li><span class="icon">🛡️</span> Parameterized SQL Queries</li>
+                <li><span class="icon">🔑</span> Secure Session Management</li>
+                <li><span class="icon">📱</span> TOTP 2FA Integration</li>
+            </ul>
+        </div>
+        
+        <div class="2fa-section" style="margin-top: 30px;">
+            {% if user.totp_secret %}
+                <div class="alert success">
+                    <strong>Excellent!</strong> Two-Factor Authentication is currently enabled on your account.
+                </div>
+            {% else %}
+                <div class="alert warning" style="margin-bottom: 15px;">
+                    <strong>Security Warning!</strong> Two-Factor Authentication is not enabled.
+                </div>
+                <a href="{{ url_for('setup_2fa') }}" class="btn btn-primary">Setup 2FA Now</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
