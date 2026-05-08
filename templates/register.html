@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - SecureGate{% endblock %}
+
+{% block content %}
+<div class="auth-card glass-effect">
+    <div class="auth-header">
+        <h1>Create Account</h1>
+        <p>Join our secure platform</p>
+    </div>
+    
+    <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autocomplete="username" autofocus>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="new-password">
+            <small class="form-text">Must be at least 8 characters long.</small>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+    
+    <div class="auth-footer">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Log in here</a></p>
+    </div>
+</div>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const pwd = document.getElementById('password').value;
+    if (pwd.length < 8) {
+        e.preventDefault();
+        alert("Password must be at least 8 characters long.");
+    }
+});
+</script>
+{% endblock %}
