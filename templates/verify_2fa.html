@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify 2FA - SecureGate{% endblock %}
+
+{% block content %}
+<div class="auth-card glass-effect">
+    <div class="auth-header">
+        <h1>Two-Factor Auth</h1>
+        <p>Enter the 6-digit code from your Authenticator App</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('verify_2fa') }}" class="auth-form">
+        <div class="form-group">
+            <input type="text" id="token" name="token" placeholder="000000" maxlength="6" required autocomplete="off" autofocus style="text-align: center; font-size: 1.5em; letter-spacing: 5px;">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Verify</button>
+        <a href="{{ url_for('login') }}" class="btn btn-outline btn-block" style="margin-top: 10px;">Back to Login</a>
+    </form>
+</div>
+{% endblock %}
